@@ -1,0 +1,134 @@
+/* ========== GLOBAL STYLES ========== */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background: linear-gradient(-45deg, #0a1d37, #1e3c72, #2a5298, #ffffff);
+    background-size: 400% 400%;
+    animation: bgShift 15s ease infinite;
+}
+
+/* Background color animation */
+@keyframes bgShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* ========== CONTAINER ========== */
+.container {
+    width: 380px;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    text-align: center;
+    animation: float 4s ease-in-out infinite;
+}
+
+/* Floating animation for the form */
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+/* ========== HEADER SECTION ========== */
+.header-section img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    animation: spinLogo 10s linear infinite;
+    margin-bottom: 10px;
+}
+
+@keyframes spinLogo {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.header-section h2 {
+    color: #fff;
+    margin: 5px 0;
+}
+
+/* ========== FORM & INPUTS ========== */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+input {
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    background: rgba(255, 255, 255, 0.8);
+    font-size: 15px;
+    transition: all 0.3s ease;
+}
+
+input:focus {
+    background: #fff;
+    box-shadow: 0 0 10px rgba(30, 60, 114, 0.6);
+}
+
+/* ========== BUTTONS ========== */
+.btn {
+    background: linear-gradient(90deg, #1e3c72, #2a5298);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn:hover {
+    background: linear-gradient(90deg, #2a5298, #1e3c72);
+    transform: scale(1.05);
+}
+
+/* ========== TEXT & MESSAGES ========== */
+h3 {
+    color: #fff;
+    font-weight: 500;
+}
+
+.message {
+    background: rgba(255, 255, 255, 0.8);
+    color: #333;
+    padding: 8px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+}
+
+/* ========== PAGE SWITCH LINKS ========== */
+.page-switch-buttons {
+    margin-bottom: 10px;
+}
+
+.page-switch-buttons .btn {
+    margin: 5px;
+}
+
+/* Small fading effect for smooth load */
+.container {
+    opacity: 0;
+    animation: fadeIn 1.5s ease forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+}
