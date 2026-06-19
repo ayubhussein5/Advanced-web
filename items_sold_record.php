@@ -2,6 +2,11 @@
 session_start();
 require 'db.php';
 
+if ($_SESSION['role'] == 'Inventory Manager') {
+    header("Location: manager_dashboard.php");
+    exit();
+}
+
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();

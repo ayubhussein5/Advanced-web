@@ -86,6 +86,7 @@
         
         <a href="view_sales_records.php" class="<?php echo (basename($_SERVER['PHP_SELF']) == 'view_sales_records.php') ? 'active' : ''; ?>">📈 Sales Records</a>
         <a href="items_sold_record.php" class="<?php echo (basename($_SERVER['PHP_SELF']) == 'items_sold_record.php') ? 'active' : ''; ?>">💰 Record New Sale</a>
+        <a href="received_orders.php">🛒 Received Orders</a>
     </div>
 
     <a href="logout.php" class="logout-btn">Logout</a>

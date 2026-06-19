@@ -31,6 +31,10 @@ $sql_sale_count = "SELECT COUNT(sale_id) AS total_sale_count FROM sales";
 $result_sale_count = $conn->query($sql_sale_count);
 $total_sale_count = $result_sale_count->fetch_assoc()['total_sale_count'] ?? 0;
 
+// 5. Total Customer Orders
+$sql_order_count = "SELECT COUNT(id) AS total_orders FROM customer_orders";
+$result_order_count = $conn->query($sql_order_count);
+$total_orders = $result_order_count->fetch_assoc()['total_orders'] ?? 0;
 // --- END FETCH DATA ---
 ?>
 
@@ -111,11 +115,14 @@ $total_sale_count = $result_sale_count->fetch_assoc()['total_sale_count'] ?? 0;
         
         <div class="content">
             <div class="welcome-header">
-                <h1 style="color: #4a69bd; margin: 0;">Dashboard Overview</h1>
-                <p style="font-size: 1.1em; color: #555;">
-                    Welcome, **<?php echo htmlspecialchars($username); ?>**. Quick system snapshot:
-                </p>
-            </div>
+    <h1 style="color:#4a69bd; margin:0;">
+        🌙 Moonlight POS Administration Center
+    </h1>
+
+    <p style="font-size:1.1em; color:#555; margin-top:10px;">
+        Monitor stock levels, manage sales records, process customer orders, and oversee business performance.
+    </p>
+</div>
             
             <div class="card-container">
                 
@@ -141,6 +148,13 @@ $total_sale_count = $result_sale_count->fetch_assoc()['total_sale_count'] ?? 0;
                     <h4>Total Transactions Logged</h4>
                     <div class="value" style="color: #3498db;"><?php echo number_format($total_sale_count); ?></div>
                     <a href="items_sold_record.php" class="link-btn" style="background-color: #3498db;">Record New Sale</a>
+                </div>
+
+                <div class="card">
+                     <h4>Received Customer Orders</h4>
+                     <div class="value" style="color: #8e44ad;"><?php echo number_format($total_orders); ?></div>
+                     <a href="received_orders.php" class="link-btn" style="background-color: #8e44ad;">
+                     View Received Orders</a>
                 </div>
 
             </div>

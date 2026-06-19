@@ -3,7 +3,7 @@
 $servername = "localhost";
 $username = "root"; 
 $password = ""; 
-$dbname = "internet_programming"; //  your database name
+$dbname = "moonlight_pos"; //  your database name
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);

@@ -1,12 +1,11 @@
 <?php
 session_start();
-include("db.php"); // connects to your database
+include("db.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = trim($_POST["username"]);
     $password = trim($_POST["password"]);
 
-    // Use prepared statements (safe and avoids SQL injection)
     $stmt = $conn->prepare("SELECT * FROM users WHERE username = ? OR email = ? LIMIT 1");
     $stmt->bind_param("ss", $username, $username);
     $stmt->execute();
@@ -15,13 +14,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($result->num_rows === 1) {
         $user = $result->fetch_assoc();
 
-        // ✅ Check if password is hashed or plain text
         if (password_verify($password, $user['password']) || $password === $user['password']) {
-            // Create session and redirect to dashboard
+
             $_SESSION['username'] = $user['username'];
             $_SESSION['user_id'] = $user['id'];
-            header("Location: dashboard.php");
+            $_SESSION['role'] = $user['role'];
+
+       if ($user['role'] == 'Inventory Manager') {
+             header("Location: manager_dashboard.php");
+            }
+           elseif ($user['role'] == 'customer') {
+          header("Location: shop_items.php");
+            }
+           else {  
+          header("Location: dashboard.php");
+            } 
+
             exit();
+
         } else {
             echo "<script>alert('Invalid password! Please try again.');</script>";
         }
@@ -32,6 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->close();
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,7 +51,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <title>Moonlight Enterprises | Login</title>
 
 <style>
-/* === GLOBAL BACKGROUND === */
 body {
     margin: 0;
     padding: 0;
@@ -54,14 +64,12 @@ body {
     animation: gradientShift 8s ease infinite;
 }
 
-/* Background animation */
 @keyframes gradientShift {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
 
-/* === CONTAINER === */
 .container {
     width: 380px;
     background: rgba(255, 255, 255, 0.1);
@@ -79,7 +87,6 @@ body {
     to { opacity: 1; transform: scale(1); }
 }
 
-/* === LOGO === */
 .logo {
     width: 100px;
     height: 100px;
@@ -102,7 +109,6 @@ body {
     100% { transform: scale(1); box-shadow: 0 0 10px rgba(255,255,255,0.4); }
 }
 
-/* === INPUTS === */
 input {
     width: 100%;
     padding: 10px;
@@ -113,7 +119,6 @@ input {
     outline: none;
 }
 
-/* === BUTTON === */
 .btn {
     width: 100%;
     padding: 10px;
@@ -131,7 +136,6 @@ input {
     transform: translateY(-2px);
 }
 
-/* === LINKS === */
 .link {
     color: #b3e5fc;
     text-decoration: none;
@@ -157,7 +161,9 @@ input {
         <button type="submit" class="btn">Login</button>
     </form>
 
-    <p style="margin-top: 15px;">Don't have an account? <a href="register.php" class="link">Register</a></p>
+    <p style="margin-top: 15px;">
+        Don't have an account? <a href="register.php" class="link">Register</a>
+    </p>
 </div>
 </body>
 </html>
